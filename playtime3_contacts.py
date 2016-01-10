@@ -64,7 +64,7 @@ contacts_html += '\n</table>'
 
 # print contacts_html, '\n'
 
-with open('../resources/contacts_goal3.html','a') as contacts_file:
+with open('../resources/contacts_goal3.html','w') as contacts_file:
 	contacts_file.write(contacts_html)
 	
 
@@ -140,5 +140,5 @@ contacts_g4_html += '\n</table>'
 # print contacts_g4_html, '\n'
 
 # write the HTML to a new file
-with open('../resources/contacts_goal4.html','a') as contacts_g4_file:
+with open('../resources/contacts_goal4.html','w') as contacts_g4_file:
 	contacts_g4_file.write(contacts_g4_html)
