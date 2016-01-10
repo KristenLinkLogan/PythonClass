@@ -119,7 +119,7 @@ for name, phone, github, twitter in zip(names, phone_numbers, github_handles, tw
 	# assign the value of this key as an empty dictionary
 	contacts_dict[key] = {} 
 	# add the contact info for 'key'
-	#should I do something else here... a loop?? if I remove the Name label from the labels list I prob could...
+	#could I do something else here... a loop?? perhaps if I had kept all the contact info together?
 	contacts_dict[key][labels[1]] = phone
 	contacts_dict[key][labels[2]] = github
 	contacts_dict[key][labels[3]] = twitter
