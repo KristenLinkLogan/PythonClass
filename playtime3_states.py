@@ -84,58 +84,19 @@ print state_info_headers,'\n'
 # format of dict? should the key be rank or state name? 
 # (state name more meaningful by human, but rank is how they will be ordered in the table...)
 
-# {
-# 	"1": {
-# 	"State": "California",
-# 	"Population Estimate": "38332521",
-# 	"US House Seats": "53",
-# 	"Percent of Total Population": "11.91%"
-# 	}
-# 	"2": {
-# 	"State": "Texas",
-# 	"Population Estimate": "26448193",
-# 	"US House Seats": "36",
-# 	"Percent of Total Population": "8.04%"
-# 	}
-# }
-
 
 state_details_html = '<table border="1">\n'
 
 # or just loop through state_info and then within the mini lists inside it...
 for index_main, state_info_detail in enumerate(state_info): #index_main counts the states, state_info_detail is each state's info
-	#print '{0}: {1}'.format(index_main, state_info_detail)
 	state_details_html += '''<tr>\n<td colspan="2"> <b>{0}</b> </td>\n</tr>\n<tr>\n<td> Rank: {1} </td>\n
 	<td> Percent: {2} </td>\n</tr>\n<tr>\n<td> US House Members: {3} </td>\n<td> Population: {4} </td>\n
 	</tr>'''.format(state_info_detail[1],state_info_detail[0],state_info_detail[4],state_info_detail[3],state_info_detail[2])
-	# for index_mini, fact in enumerate(state_info_detail): #index_mini counts the facts within each state_info_detail mini list
-	 	#print '{0}: {1}'.format(state_info_headers[index_mini],fact)
 	 	
 state_details_html += '\n</table>'
 
 with open('../output/states_info.html','w') as states_info_file:
 	states_info_file.write(state_details_html)
 
-# Sample output:
-
-# <table border="1">
-# <tr>
-# <td colspan="2"> California </td>
-# </tr>
-# <tr>
-# <td> Rank: 1 </td>
-# <td> Percent: 11.91% </td>
-# </tr>
-# <tr>
-# <td> US House Members: 53 </td>
-# <td> Population: 38,332,521 </td>
-# </tr>
-# </table>
 
 # Challenge 4 (Not a Python challenge, but an HTML/Javascript challenge): When you make a choice from the drop-down menu, jump to that state's table.
-
-
-
-
-
-
