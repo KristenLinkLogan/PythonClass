@@ -17,10 +17,6 @@ studybuddy_5 = 'Nina Verity, 111 Bridge St, Solvey, NY 13209'
 # 13078
 # (etc)
 
-# bud1_len = len(studybuddy_1)
-# bud2_len = len(studybuddy_2)
-# bud3_len = len
-
 print studybuddy_1[-5:]
 print studybuddy_2[-5:]
 print studybuddy_3[-5:]
