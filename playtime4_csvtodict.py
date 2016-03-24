@@ -40,6 +40,9 @@ from playtime4_csvtolist import csv_to_list
 
 def csv_to_dict(filename,delimiter=","):
 	"""
+	reads in the data from a csv file and outputs the data in an embedded dictionary
+	top level keys are row numbers (e.g., "row 1")
+	lower level keys are the names of the headers from the csv file
 	"""
 
 	# call csv_to_list function to create a list of lists (called 'list_of_lists' from the csv file
