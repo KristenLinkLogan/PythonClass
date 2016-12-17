@@ -22,13 +22,15 @@ contacts = {
 	}
 }
 
+# print contacts, '\n'
+
 # Goal 1: Loop through that dictionary to print out everyone's contact information.
 
 for key,value in contacts.items():
     print "{0}'s contact information is:".format(key)
-    print "\tPhone: {0}".format(contacts.get(key).get('Phone'))
-    print "\tTwitter: {0}".format(contacts.get(key).get('Twitter'))
-    print "\tGithub: {0}".format(contacts.get(key).get('Github'))
+    print "\tPhone: {0}".format(value.get('Phone'))
+    print "\tTwitter: {0}".format(value.get('Twitter'))
+    print "\tGithub: {0}".format(value.get('Github'))
 
 
 print "\n"
@@ -42,9 +44,9 @@ for key,value in contacts.items():
 	print '\t\t<td colspan="2"> {0} </td>'.format(key)
 	print '\t</tr>'
 	print '\t<tr>'
-	print '\t\t<td> Phone: {0} </td>'.format(contacts.get(key).get('Phone'))
-	print '\t\t<td> Twitter: {0} </td>'.format(contacts.get(key).get('Twitter'))
-	print '\t\t<td> Github: {0} </td>'.format(contacts.get(key).get('Github'))
+	print '\t\t<td> Phone: {0} </td>'.format(value.get('Phone'))
+	print '\t\t<td> Twitter: {0} </td>'.format(value.get('Twitter'))
+	print '\t\t<td> Github: {0} </td>'.format(value.get('Github'))
 	print '\t</tr>'
 
 print '</table>'
@@ -58,13 +60,13 @@ contacts_html = '<table border="1">'
 for key,value in contacts.items():
 	contacts_html += '''\n\t<tr>\n\t\t<td colspan="3"> {0} </td>\n\t</tr>\n\t
 	<tr>\n\t\t<td> Phone: {1} </td>\n\t\t<td> Twitter: {2} </td>\n\t\t<td> Github: {3} </td>\n\t
-	</tr>'''.format(key,contacts.get(key).get('Phone'),contacts.get(key).get('Twitter'),contacts.get(key).get('Github'))
+	</tr>'''.format(key,value.get('Phone'),value.get('Twitter'),value.get('Github'))
 
 contacts_html += '\n</table>'
 
 # print contacts_html, '\n'
 
-with open('../resources/contacts_goal3.html','w') as contacts_file:
+with open('../output/contacts_goal3.html','w') as contacts_file:
 	contacts_file.write(contacts_html)
 	
 
@@ -72,9 +74,9 @@ with open('../resources/contacts_goal3.html','w') as contacts_file:
 
 #read in the file bring the entire contents in as a string, which I'm converting to a list of the rows...
 with open("../resources/contacts.csv","r") as contacts_file:
-	contacts = contacts_file.read().split("\n")
+	contacts = contacts_file.read().split("\n") # contacts is the variable that is the entire contents of the file, split into list elements where there is a new line
 
-# print contacts,'\n'
+print contacts,'\n'
 
 # ['Name,Phone,Github,Twitter', 'Shannon,202-555-1234,@shannonturner,@svt827', 
 # 'Beyonce,303-404-9876,@bey,@beyonce', 'Tegan and Sara,301-777-3313,@heartthrob,@teganandsara'] 
@@ -85,18 +87,15 @@ phone_numbers = []
 twitter_handles = []
 github_handles = []
 
-#first creat lists within the list (list of column headers, list of Shannon info, list of Beyonce info, etc.)
-for index, contact in enumerate(contacts): 
-	contacts[index] = contact.split(",") 
+for index, contact in enumerate(contacts): #enumerate loops through the list and gives you an index and the value for each element
+	contacts[index] = contact.split(",") # now we're splitting each element of the list into a mini list containing each fact about each contact
 
-#remove the first mini list (the column headers/labels) and creates a new list containing them
-labels = contacts.pop(0) 
+labels = contacts.pop(0) #removes the first element (the labels) and creates a new list containing them
 
 # print labels,'\n'
 # print contacts,'\n'
 
-#loop through the list of lists again, and create separate lists for each type of data (all the names, all the phone numbers, etc.)
-#Is this an extra step? Can I create a dictionary right from the "Shannon" list??
+#loop through the list of lists again, and create the separate lists for each type of data
 for index, contact in enumerate(contacts): 
 	names.append(contacts[index][0])
 	phone_numbers.append(contacts[index][1])
@@ -109,17 +108,14 @@ for index, contact in enumerate(contacts):
 # print github_handles,'\n'
 # print twitter_handles,'\n'
 
-#create the dictionary for the data. 
+#create a dictionary for the data. Do I need this? Do I also need a dictionary for each person (since we have embedded dictionary)
 contacts_dict = {}
 
 #for each name, create a dictionary entry with their contact info into contacts_dict
-for name, phone, github, twitter in zip(names, phone_numbers, github_handles, twitter_handles):
-	#assign the name of the key as 'name' to be an entry in contacts_dict;
-	key = name  
-	# assign the value of this key as an empty dictionary
-	contacts_dict[key] = {} 
-	# add the contact info for 'key'
-	#could I do something else here... a loop?? perhaps if I had kept all the contact info together?
+for name,phone,github,twitter in zip(names,phone_numbers,github_handles,twitter_handles):
+	key = name  #assign the name of the key as 'name' to be an entry in contacts_dict;
+	contacts_dict[key] = {} # assign the value of this key as an empty dictionary
+	#should I do something else here... a loop?? if I remove the Name label from the labels list I prob could...
 	contacts_dict[key][labels[1]] = phone
 	contacts_dict[key][labels[2]] = github
 	contacts_dict[key][labels[3]] = twitter
@@ -133,12 +129,12 @@ contacts_g4_html = '<table border="1">'
 for key,value in contacts_dict.items():
 	contacts_g4_html += '''\n\t<tr>\n\t\t<td colspan="3"> {0} </td>\n\t</tr>\n\t
 	<tr>\n\t\t<td> Phone: {1} </td>\n\t\t<td> Twitter: {2} </td>\n\t\t<td> Github: {3} </td>\n\t
-	</tr>'''.format(key,contacts_dict.get(key).get('Phone'),contacts_dict.get(key).get('Twitter'),contacts_dict.get(key).get('Github'))
+	</tr>'''.format(key,value.get('Phone'),value.get('Twitter'),value.get('Github'))
 
 contacts_g4_html += '\n</table>'
 
 # print contacts_g4_html, '\n'
 
 # write the HTML to a new file
-with open('../resources/contacts_goal4.html','w') as contacts_g4_file:
+with open('../output/contacts_goal4.html','w') as contacts_g4_file:
 	contacts_g4_file.write(contacts_g4_html)
