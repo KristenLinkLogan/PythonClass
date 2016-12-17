@@ -78,11 +78,11 @@ print survey_dict,'\n'
 # if it is, print out the message including all the employee's survey info
 
 for name, info in employees_dict.items():
-	email_address = employees_dict.get(name).get("email")
+	email_address = info.get("email")
 	for survey_number, data in survey_dict.items():
-		if survey_dict.get(survey_number).get("email") == email_address:
+		if data.get("email") == email_address:
 			print """{0} took the survey! The respondent's contact information is: Twitter: {1}, Github: {2}, Phone: {3}, Email: {4}
-			""".format(name,survey_dict.get(survey_number).get("twitter"),survey_dict.get(survey_number).get("github"),employees_dict.get(name).get("phone"),email_address)
+			""".format(name,data.get("twitter"),data.get("github"),data.get("phone"),email_address)
 
 
 # Challenge 2: Add the extra information from survey.csv into all_employees.csv as extra columns.  
@@ -96,11 +96,11 @@ print employees_plus_dict,'\n'
 
 #use the same loop logic as above, but instead of printing out info, let's add the new info to the dict
 for name, info in employees_dict.items():
-	email_address = employees_dict.get(name).get("email")
+	email_address = info.get("email")
 	for survey_number, data in survey_dict.items():
-		if survey_dict.get(survey_number).get("email") == email_address:
-			employees_plus_dict[name]["twitter"] = survey_dict.get(survey_number).get("twitter")
-			employees_plus_dict[name]["github"] = survey_dict.get(survey_number).get("github")
+		if data.get("email") == email_address:
+			employees_plus_dict[name]["twitter"] = data.get("twitter")
+			employees_plus_dict[name]["github"] = data.get("github")
 
 
 print employees_plus_dict,'\n'
@@ -111,12 +111,12 @@ employees_text = "Name,Email,Phone,Department,Position,Twitter,Github"
 
 #loop through the dictionary to add each employee as a new line of data
 for name, info in employees_plus_dict.items():
-	email = employees_plus_dict.get(name).get("email")
-	phone = employees_plus_dict.get(name).get("phone")
-	department = employees_plus_dict.get(name).get("department")
-	position = employees_plus_dict.get(name).get("position")
-	twitter = employees_plus_dict.get(name).get("twitter")
-	github = employees_plus_dict.get(name).get("github")
+	email = info.get("email","")
+	phone = info.get("phone","")
+	department = info.get("department","")
+	position = info.get("position","")
+	twitter = info.get("twitter","")
+	github = info.get("github","")
 	employees_text += "\n{0},{1},{2},{3},{4},{5},{6}".format(name,email,phone,department,position,twitter,github)
 
 print employees_text
